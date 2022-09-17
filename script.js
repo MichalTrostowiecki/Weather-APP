@@ -49,6 +49,15 @@ function displayData(data) {
   let dateSunset = new Date(secSunset * 1000);
   let timeStrSunset = dateSunset.toLocaleTimeString();
 
+  //I've written that to capitalize first letter of the description as API sends it with small letters
+  const weatherDescription = data.weather[0].description;
+  let capitalizeDescription =
+    weatherDescription.charAt(0).toUpperCase() + weatherDescription.slice(1);
+
+  document.querySelector(
+    "#weather-description"
+  ).textContent = `${capitalizeDescription}`;
+
   document.querySelector("#city").innerHTML = `${data.name}`;
   document.querySelector(
     "#img"
@@ -59,12 +68,12 @@ function displayData(data) {
   document.querySelector(
     "#wind"
   ).innerHTML = `Wind Speed: ${data.wind.speed} Km/h`;
-  document.querySelector(
-    "#feels-like"
-  ).textContent = `Feels Like:${data.main.feels_like}`;
+  document.querySelector("#feels-like").textContent = `Feels Like: ${Math.round(
+    data.main.feels_like
+  )}°C`;
   document.querySelector(
     "#humidity"
-  ).textContent = `Humidity: ${data.main.humidity}`;
+  ).textContent = `Humidity: ${data.main.humidity}%`;
   document.querySelector("#sunrise").textContent = `${timeStrSunrise}`;
   document.querySelector("#sunset").textContent = `${timeStrSunset}`;
 
