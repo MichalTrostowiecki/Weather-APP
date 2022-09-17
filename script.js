@@ -11,6 +11,7 @@ async function getGeoCode(city) {
     );
     const data = await response.json();
     await getWeather(data[0].lat, data[0].lon);
+    await get5day(data[0].lat, data[0].lon);
   } catch (error) {
     console.error(error);
   }
@@ -76,8 +77,42 @@ function displayData(data) {
   ).textContent = `Humidity: ${data.main.humidity}%`;
   document.querySelector("#sunrise").textContent = `${timeStrSunrise}`;
   document.querySelector("#sunset").textContent = `${timeStrSunset}`;
+}
 
-  console.log(data);
+async function get5day(lat, lon) {
+  try {
+    units = "metric";
+    const response = await fetch(
+      `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_key}&units=${units}`,
+      { mode: "cors" }
+    );
+    const data = await response.json();
+    console.log(data);
+    displayNext3Hours(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+//I need to convert date I have in this list first
+//Then I will extract next 5 days on
+function displayNext3Hours(data) {
+  let today = new Date();
+  let day = String(today.getDate());
+
+  console.log(day);
+  const days = data.list;
+  for (i = 0; i < days.length; i++) {
+    let sec = data.list[i].dt;
+    let date = new Date(sec * 1000);
+    let currentDay = String(date.getDate());
+    let timeStrSunrise = date.toLocaleDateString();
+
+    if (day === currentDay) {
+      console.log(timeStrSunrise);
+    } else {
+      console.log("niet");
+    }
+  }
 }
 
 usersCity();
