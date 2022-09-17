@@ -8,6 +8,35 @@
     <title>Document</title>
   </head>
   <body>
+    <div class="input-container">
+      <label for="user-input" name="user-input">City:</label>
+      <input
+        type="text"
+        id="user-input"
+        class="user-input"
+        placeholder="Enter Location"
+      />
+      <button class="btn-input">Search</button>
+    </div>
+
+    <div class="weatherCard-container">
+      <div class="main-info">
+        <p id="city"></p>
+        <p id="current-temp"></p>
+        <img src="#" alt="img" id="img" />
+      </div>
+      <div class="sunrise-sunset">
+        <p>Sunrise:</p>
+        <p id="sunrise"></p>
+        <p class="sunset">Sunset:</p>
+        <p id="sunset"></p>
+      </div>
+      <div class="other-info">
+        <p id="wind"></p>
+        <p id="feels-like"></p>
+        <p id="humidity"></p>
+      </div>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
