@@ -93,8 +93,7 @@ async function get5day(lat, lon) {
     console.error(error);
   }
 }
-//I need to convert date I have in this list first
-//Then I will extract next 5 days on
+//This function extracts whatever hours left for today to show me a weather
 function displayNext3Hours(data) {
   let today = new Date();
   let day = String(today.getDate());
@@ -106,11 +105,9 @@ function displayNext3Hours(data) {
     let date = new Date(sec * 1000);
     let currentDay = String(date.getDate());
     let timeStrSunrise = date.toLocaleDateString();
-
     if (day === currentDay) {
-      console.log(timeStrSunrise);
+      console.log(data.list[i].main);
     } else {
-      console.log("niet");
     }
   }
 }
