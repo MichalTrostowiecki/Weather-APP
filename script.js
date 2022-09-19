@@ -97,19 +97,23 @@ async function get5day(lat, lon) {
 function displayNext3Hours(data) {
   let today = new Date();
   let day = String(today.getDate());
-
-  console.log(day);
   const days = data.list;
+
   for (i = 0; i < days.length; i++) {
     let sec = data.list[i].dt;
     let date = new Date(sec * 1000);
     let currentDay = String(date.getDate());
     let timeStrSunrise = date.toLocaleDateString();
+
     if (day === currentDay) {
       console.log(data.list[i].main);
     } else {
     }
   }
+}
+
+function createDomElements(data) {
+  document.querySelector(".hourlyWeather").createElement("p");
 }
 
 usersCity();
