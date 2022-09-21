@@ -105,15 +105,31 @@ function displayNext3Hours(data) {
     let timeStrSunrise = date.toLocaleDateString();
 
     if (day === currentDay) {
-      let weather = data.list[i];
-      // console.log(weather);
+      let weatherData = data.list[i];
+      threeHoursDisplay(weatherData);
     } else {
     }
   }
 }
 
-function threeHoursDisplay(data) {
+function threeHoursDisplay(weatherData) {
+  console.log(weatherData);
   const container = document.querySelector(".hourlyWeather");
+  const timeOfDay = document.createElement("p");
+  const temperature = document.createElement("p");
+  const icon = document.createElement("img");
+  const weatherConditionName = document.createElement("p");
+  const weatherDescription = document.createElement("p");
+
+  timeOfDay.textContent = weatherData.dt_txt;
+  temperature.textContent = weatherData.main.temp + "°C";
+  icon.src = `http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`;
+  weatherDescription.textContent = weatherData.weather[0].description;
+
+  container.appendChild(timeOfDay);
+  container.appendChild(temperature);
+  container.appendChild(icon);
+  container.appendChild(weatherDescription);
 }
 
 usersCity();
