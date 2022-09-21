@@ -92,23 +92,10 @@ async function get5day(lat, lon) {
     console.error(error);
   }
 }
-//This function extracts whatever hours left for today to show me a weather
+
 function displayNext3Hours(data) {
-  let today = new Date();
-  let day = String(today.getDate());
-  const days = data.list;
-
-  for (i = 0; i < days.length; i++) {
-    let sec = data.list[i].dt;
-    let date = new Date(sec * 1000);
-    let currentDay = String(date.getDate());
-    let timeStrSunrise = date.toLocaleDateString();
-
-    if (day === currentDay) {
-      let weatherData = data.list[i];
-      threeHoursDisplay(weatherData);
-    } else {
-    }
+  for (i = 0; i < 9; i++) {
+    threeHoursDisplay(data);
   }
 }
 
@@ -121,10 +108,10 @@ function threeHoursDisplay(weatherData) {
   const weatherConditionName = document.createElement("p");
   const weatherDescription = document.createElement("p");
 
-  timeOfDay.textContent = weatherData.dt_txt;
-  temperature.textContent = weatherData.main.temp + "°C";
-  icon.src = `http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`;
-  weatherDescription.textContent = weatherData.weather[0].description;
+  timeOfDay.textContent = weatherData.list[i].dt_txt;
+  temperature.textContent = Math.round(weatherData.list[i].main.temp) + "°C";
+  icon.src = `http://openweathermap.org/img/w/${weatherData.list[i].weather[0].icon}.png`;
+  weatherDescription.textContent = weatherData.list[i].weather[0].description;
 
   container.appendChild(timeOfDay);
   container.appendChild(temperature);
