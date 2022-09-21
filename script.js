@@ -2,6 +2,28 @@
 
 const API_key = "a9953a940685c631ebcd1117eeb25ca4";
 
+function creatingDom() {
+  const weatherCard = document.querySelector(".weatherCard-container");
+  weatherCard.innerHTML = `
+  <div class="main-info">
+        <p id="city"></p>
+        <p id="current-temp"></p>
+        <img src="#" alt="img" id="img" />
+        <p id="weather-description"></p>
+      </div>
+      <div class="sunrise-sunset">
+        <p>Sunrise:</p>
+        <p id="sunrise"></p>
+        <p class="sunset">Sunset:</p>
+        <p id="sunset"></p>
+      </div>
+      <div class="other-info">
+        <p id="wind"></p>
+        <p id="feels-like"></p>
+        <p id="humidity"></p>
+      </div>`;
+}
+
 // We are getting a cordinates for specific city that API needs to display data for us
 async function getGeoCode(city) {
   try {
@@ -10,6 +32,7 @@ async function getGeoCode(city) {
       { mode: "cors" }
     );
     const data = await response.json();
+    creatingDom();
     await getWeather(data[0].lat, data[0].lon);
     await get5day(data[0].lat, data[0].lon);
   } catch (error) {
@@ -34,10 +57,22 @@ async function getWeather(lat, lon) {
 // DOM manipulation functions below
 function usersCity() {
   const inputBtn = document.querySelector(".btn-input");
+  const resetBtn = document.querySelector(".reset-btn");
   inputBtn.addEventListener("click", () => {
     const input = document.querySelector(".user-input");
     getGeoCode(input.value);
   });
+  resetBtn.addEventListener("click", clearWindow);
+}
+
+// this function clears previous weather search;
+function clearWindow() {
+  const weatherCard = document.querySelector(".weatherCard-container");
+  const hourlyWeather = document.querySelector(".hourlyWeather");
+  if (weatherCard.innerHTML !== "") {
+    weatherCard.innerHTML = "";
+    hourlyWeather.innerHTML = "";
+  }
 }
 
 // this function will display all the weather info based on user input
@@ -92,31 +127,34 @@ async function get5day(lat, lon) {
     console.error(error);
   }
 }
-
+// This function display weather for the next 24 hours
 function displayNext3Hours(data) {
   for (i = 0; i < 9; i++) {
     threeHoursDisplay(data);
   }
 }
 
+// this function create all the DOM elements for 3 hours display
 function threeHoursDisplay(weatherData) {
   console.log(weatherData);
   const container = document.querySelector(".hourlyWeather");
+  const weatherDisplayCard = document.createElement("div");
   const timeOfDay = document.createElement("p");
   const temperature = document.createElement("p");
   const icon = document.createElement("img");
-  const weatherConditionName = document.createElement("p");
   const weatherDescription = document.createElement("p");
 
+  weatherDisplayCard.classList.add("three-hourly-display");
   timeOfDay.textContent = weatherData.list[i].dt_txt;
   temperature.textContent = Math.round(weatherData.list[i].main.temp) + "°C";
   icon.src = `http://openweathermap.org/img/w/${weatherData.list[i].weather[0].icon}.png`;
   weatherDescription.textContent = weatherData.list[i].weather[0].description;
 
-  container.appendChild(timeOfDay);
-  container.appendChild(temperature);
-  container.appendChild(icon);
-  container.appendChild(weatherDescription);
+  container.appendChild(weatherDisplayCard);
+  weatherDisplayCard.appendChild(timeOfDay);
+  weatherDisplayCard.appendChild(temperature);
+  weatherDisplayCard.appendChild(icon);
+  weatherDisplayCard.appendChild(weatherDescription);
 }
 
 usersCity();
