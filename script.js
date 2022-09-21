@@ -87,7 +87,6 @@ async function get5day(lat, lon) {
       { mode: "cors" }
     );
     const data = await response.json();
-    console.log(data);
     displayNext3Hours(data);
   } catch (error) {
     console.error(error);
@@ -106,14 +105,15 @@ function displayNext3Hours(data) {
     let timeStrSunrise = date.toLocaleDateString();
 
     if (day === currentDay) {
-      console.log(data.list[i].main);
+      let weather = data.list[i];
+      // console.log(weather);
     } else {
     }
   }
 }
 
-function createDomElements(data) {
-  document.querySelector(".hourlyWeather").createElement("p");
+function threeHoursDisplay(data) {
+  const container = document.querySelector(".hourlyWeather");
 }
 
 usersCity();
