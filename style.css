@@ -1,0 +1,9 @@
+.hourlyWeather {
+  display: flex;
+}
+
+.three-hourly-display {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+}

@@ -149,12 +149,17 @@ function threeHoursDisplay(weatherData) {
   const icon = document.createElement("img");
   const weatherDescription = document.createElement("p");
 
+  //This capitalize first letter of the weather description
+  const description = weatherData.list[i].weather[0].description;
+  let capitalizeDescription =
+    description.charAt(0).toUpperCase() + description.slice(1);
+
   weatherDisplayCard.classList.add("three-hourly-display");
   container.classList.add("active");
   timeOfDay.textContent = weatherData.list[i].dt_txt;
   temperature.textContent = Math.round(weatherData.list[i].main.temp) + "°C";
   icon.src = `http://openweathermap.org/img/w/${weatherData.list[i].weather[0].icon}.png`;
-  weatherDescription.textContent = weatherData.list[i].weather[0].description;
+  weatherDescription.textContent = capitalizeDescription;
 
   container.appendChild(weatherDisplayCard);
   weatherDisplayCard.appendChild(timeOfDay);
@@ -166,6 +171,8 @@ function threeHoursDisplay(weatherData) {
 
 usersCity();
 
+// This function add "active" class to hourlyWeather container
+// I'll use it later for toggle and styling
 function activateDisplay(container) {
   if (container.classList.contains("active")) {
     console.log("I'm active");
