@@ -32,7 +32,6 @@ async function getGeoCode(city) {
       { mode: "cors" }
     );
     const data = await response.json();
-    creatingDom();
     await getWeather(data[0].lat, data[0].lon);
     await get5day(data[0].lat, data[0].lon);
   } catch (error) {
@@ -49,6 +48,7 @@ async function getWeather(lat, lon) {
     { mode: "cors" }
   );
   const data = await response.json();
+  creatingDom();
   displayData(data);
 }
 
@@ -60,6 +60,7 @@ function usersCity() {
   const resetBtn = document.querySelector(".reset-btn");
   inputBtn.addEventListener("click", () => {
     const input = document.querySelector(".user-input");
+    clear3hoursDisplay();
     getGeoCode(input.value);
   });
   resetBtn.addEventListener("click", clearWindow);
@@ -73,6 +74,11 @@ function clearWindow() {
     weatherCard.innerHTML = "";
     hourlyWeather.innerHTML = "";
   }
+}
+
+function clear3hoursDisplay() {
+  const hourlyWeather = document.querySelector(".hourlyWeather");
+  hourlyWeather.innerHTML = "";
 }
 
 // this function will display all the weather info based on user input
@@ -136,7 +142,6 @@ function displayNext3Hours(data) {
 
 // this function create all the DOM elements for 3 hours display
 function threeHoursDisplay(weatherData) {
-  console.log(weatherData);
   const container = document.querySelector(".hourlyWeather");
   const weatherDisplayCard = document.createElement("div");
   const timeOfDay = document.createElement("p");
@@ -145,6 +150,7 @@ function threeHoursDisplay(weatherData) {
   const weatherDescription = document.createElement("p");
 
   weatherDisplayCard.classList.add("three-hourly-display");
+  container.classList.add("active");
   timeOfDay.textContent = weatherData.list[i].dt_txt;
   temperature.textContent = Math.round(weatherData.list[i].main.temp) + "°C";
   icon.src = `http://openweathermap.org/img/w/${weatherData.list[i].weather[0].icon}.png`;
@@ -155,6 +161,15 @@ function threeHoursDisplay(weatherData) {
   weatherDisplayCard.appendChild(temperature);
   weatherDisplayCard.appendChild(icon);
   weatherDisplayCard.appendChild(weatherDescription);
+  activateDisplay(container);
 }
 
 usersCity();
+
+function activateDisplay(container) {
+  if (container.classList.contains("active")) {
+    console.log("I'm active");
+  } else {
+    console.log("I'm not");
+  }
+}
