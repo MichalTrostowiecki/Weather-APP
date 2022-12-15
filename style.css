@@ -1,13 +1,20 @@
+body {
+  margin: 0;
+  background-color: azure;
+}
 
 .main-container {
   display: flex;
   flex-direction: column;
+
   align-items: center;
+  color: whitesmoke;
 }
 
 
 .hourlyWeather {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .three-hourly-display {
@@ -18,10 +25,76 @@
 
 .weatherCard-container {
   display: flex;
+  flex-direction: column;
   text-align: center;
+  background: rgba(1, 1, 1, 0.2);
+  margin: 20px;
+  border-radius: 20px;
+  width: 300px;
 }
 
 .main-info {
-  height: 40vh;
-  width: 40vw;
+  font-size: 1.4rem;
+  
 }
+
+.weatherCard-container img {
+  height: 60px;
+  width: auto;
+  margin: 0;
+}
+
+.sunrise-container, .sunset-container {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.sunrise-sunset {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+
+#weather-description  {
+  margin: 0;
+}
+
+.wind {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.wind p {
+ margin-left: 10px;
+}
+
+.other-info {
+  margin-top: 10px;
+  background: rgba(1, 1, 1, 0.2);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top:solid rgb(1,1,1, 0.2)
+}
+.three-hourly-display {
+
+  background: rgba(1, 1, 1, 0.2);
+  text-align: center;
+  border-radius: 20px;
+  width: 150px;
+}
+
+.three-hourly-display img {
+  display: block;
+  margin: auto;
+  height: 60px;
+  width: 60px;
+  
+}
+
+
+

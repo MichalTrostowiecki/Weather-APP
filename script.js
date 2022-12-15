@@ -11,16 +11,24 @@ function creatingDom() {
         <img src="#" alt="img" id="img" />
         <p id="weather-description"></p>
       </div>
-      <div class="sunrise-sunset">
-        <p>Sunrise:</p>
-        <p id="sunrise"></p>
-        <p class="sunset">Sunset:</p>
-        <p id="sunset"></p>
-      </div>
       <div class="other-info">
-        <p id="wind"></p>
-        <p id="feels-like"></p>
-        <p id="humidity"></p>
+        <div class="sunrise-sunset">
+          <div class="sunrise-container">
+            <img src="./sunrise.png">
+            <p id="sunrise"></p> 
+          </div>
+          <div class="sunset-container">
+            <img src="./sunset.png">
+            <p id="sunset"></p> 
+          </div>
+        </div>
+        
+          <div class="wind">
+            <i class="fa-solid fa-wind"></i>
+            <p id="wind"></p>
+          </div>
+          <p id="feels-like"></p>
+          <p id="humidity"></p>
       </div>`;
 }
 
@@ -104,12 +112,11 @@ function displayData(data) {
   document.querySelector(
     "#img"
   ).src = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
-  document.querySelector("#current-temp").textContent = `Temperature: ${
+
+  document.querySelector("#current-temp").textContent = `${
     Math.round(data.main.temp) + "°C"
   }`;
-  document.querySelector(
-    "#wind"
-  ).innerHTML = `Wind Speed: ${data.wind.speed} Km/h`;
+  document.querySelector("#wind").innerHTML = `${data.wind.speed} Km/h`;
   document.querySelector("#feels-like").textContent = `Feels Like: ${Math.round(
     data.main.feels_like
   )}°C`;
