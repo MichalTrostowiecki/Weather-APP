@@ -1,31 +1,19 @@
 body {
   margin: 0;
-  min-height: 800px;
+  min-height: 100vh;
 
 }
 
-/* .bg-container {
-  background: url(./background.jpg);
-  height: 100%;
-  box-sizing: border-box;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  min-height: 900px;
 
-} */
-
-
-.bg-container {
-  padding: 40px;
-  
+body {
   background-image: url("./background.jpg");
   background-size: cover;
   height: 100%;
   width: 100vw;
-  background-position: center;
-  background-color: bisque;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
+
 
 
 
@@ -41,6 +29,8 @@ body {
   display: flex;
   flex-shrink: 5;
   flex-wrap: wrap;
+  padding: 20px;
+  justify-content: space-evenly;
 }
 
 .three-hourly-display {
@@ -48,7 +38,13 @@ body {
   flex-direction: column;
   margin: 5px;
   flex-wrap: wrap;
+  min-width: 150px;
   
+}
+
+.three--description {
+  max-width: 60px;
+  align-self: center;
 }
 
 .weatherCard-container {
@@ -145,13 +141,53 @@ input {
  width: 350px;
  margin-right: 20px;
  color: white;
+ height: 2rem;
+}
+
+
+
+  
+
+
+.btn-input {
+  background-color: rgba(0, 0, 0, 0.523);
+ color: white;
+ border-radius: 5px;
+ padding: 8px 20px;
+ border-style: none;
+ margin-right: 10px;
+ cursor: pointer;
 }
 
 
 
 
-@media only screen and (max-width: 600px) {
-   
-    
+.reset-btn {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.523);
+  color: white;
+  border-radius: 5px;
+  padding: 8px 20px;
+  border-style: none;
+}
   
+
+
+
+@media only screen and (max-width: 600px) {
+
+  .three-hourly-display {
+    min-width: 90px;
+  }
+
+  .input-container {
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 60px;
+  }
+
+  #user-input {
+    margin-left: 20px;
+  }
+
 }
