@@ -52,7 +52,7 @@ async function getGeoCode(city) {
 async function getWeather(lat, lon) {
   units = "metric";
   const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_key}&units=${units}`,
+    `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_key}&units=${units}`,
     { mode: "cors" }
   );
   const data = await response.json();

@@ -1,11 +1,10 @@
-html,body {
+body {
   margin: 0;
-  min-width: 650px;
-  height:100%;
-  
+  min-height: 800px;
+
 }
 
-.bg-container {
+/* .bg-container {
   background: url(./background.jpg);
   height: 100%;
   box-sizing: border-box;
@@ -14,7 +13,21 @@ html,body {
   background-position: center center;
   min-height: 900px;
 
+} */
+
+
+.bg-container {
+  padding: 40px;
+  
+  background-image: url("./background.jpg");
+  background-size: cover;
+  height: 100%;
+  width: 100vw;
+  background-position: center;
+  background-color: bisque;
 }
+
+
 
 .main-container {
   display: flex;
@@ -27,14 +40,14 @@ html,body {
 .hourlyWeather {
   display: flex;
   flex-shrink: 5;
+  flex-wrap: wrap;
 }
 
 .three-hourly-display {
   display: flex;
   flex-direction: column;
   margin: 5px;
- 
-  
+  flex-wrap: wrap;
   
 }
 
@@ -125,7 +138,7 @@ html,body {
 }
 
 input {
- background-color: rgb(135, 135, 135);
+ background-color: rgba(135, 135, 135, 0.244);
  border: none;
  border-radius: 20px;
  text-indent: 10px;
@@ -134,3 +147,11 @@ input {
  color: white;
 }
 
+
+
+
+@media only screen and (max-width: 600px) {
+   
+    
+  
+}
